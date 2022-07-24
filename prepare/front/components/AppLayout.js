@@ -1,9 +1,20 @@
 import propTypes from "prop-types";
 import Link from "next/link";
 import { Menu, Input, Row, Col } from "antd";
+import styled from "styled-components";
 import "antd/dist/antd.css";
+import { useState } from "react";
+
+import UserProfile from "../components/UserProfile";
+import LogginForm from "../components/LoginForm";
+
+const SearchInput = styled(Input.Search)`
+  verticalalign: "middle";
+`;
 
 const AppLayout = ({ children }) => {
+  const [isLoggendIn, setIsLoggedIn] = useState(false);
+
   return (
     <div>
       <Menu mode="horizontal">
@@ -18,7 +29,7 @@ const AppLayout = ({ children }) => {
           </Link>
         </Menu.Item>
         <Menu.Item>
-          <Input.Search enterButton style={{ verticalAlign: "middle" }} />
+          <Input.Search SearchInput />
         </Menu.Item>
         <Menu.Item>
           <Link href="/signup">
@@ -28,7 +39,11 @@ const AppLayout = ({ children }) => {
       </Menu>
       <Row gutter={8}>
         <Col xs={24} md={6}>
-          왼쪽 메뉴
+          {isLoggendIn ? (
+            <UserProfile setIsLoggedIn={setIsLoggedIn} />
+          ) : (
+            <LogginForm setIsLoggedIn={setIsLoggedIn} />
+          )}
         </Col>
         <Col xs={24} md={12}>
           {children}
@@ -37,7 +52,7 @@ const AppLayout = ({ children }) => {
           <a
             href="https://velog.io/@rlathgml0726"
             target="_blank"
-            rel="noreferrer"
+            rel="noreferrer noopener"
           >
             made by sohee
           </a>
