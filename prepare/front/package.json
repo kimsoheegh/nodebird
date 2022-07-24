@@ -5,13 +5,22 @@
   "main": "index.js",
   "scripts": {
     "dev": "next",
-    "build" : "next build"
+    "build": "next build"
   },
   "author": "sohee",
   "license": "ISC",
   "dependencies": {
+    "@ant-design/icons": "^4.7.0",
+    "antd": "^4.21.7",
     "next": "^9.5.5",
+    "prop-types": "^15.8.1",
     "react": "^16.14.0",
-    "react-dom": "^16.14.0"
+    "react-dom": "^16.14.0",
+    "styled-components": "^5.3.5"
+  },
+  "devDependencies": {
+    "eslint": "^8.20.0",
+    "eslint-plugin-react": "^7.30.1",
+    "eslint-plugin-react-hooks": "^4.6.0"
   }
 }
