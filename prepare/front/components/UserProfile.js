@@ -5,6 +5,7 @@ const UserProfile = ({ setIsLoggedIn }) => {
   const onLogOut = useCallback(() => {
     setIsLoggedIn(false);
   }, []);
+
   return (
     <Card
       actions={[
