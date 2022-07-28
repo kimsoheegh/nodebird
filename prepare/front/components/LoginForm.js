@@ -44,7 +44,7 @@ const LogginForm = () => {
       </div>
       <ButtonWrapper>
         <Button type="primary" htmlType="submit" loading={false}>
-          로그인
+          로그인로그?
         </Button>
         <Link href="/signup">
           <a>
