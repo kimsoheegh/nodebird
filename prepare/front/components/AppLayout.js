@@ -3,17 +3,21 @@ import Link from "next/link";
 import { Menu, Input, Row, Col } from "antd";
 import styled from "styled-components";
 import "antd/dist/antd.css";
-import { useState } from "react";
+import { useSelector } from "react-redux";
 
 import UserProfile from "../components/UserProfile";
 import LogginForm from "../components/LoginForm";
+
+// const SearchInput = styled(Input.Search)`
+//   verticalalign: "middle";
+// `;
 
 const SearchInput = styled(Input.Search)`
   verticalalign: "middle";
 `;
 
 const AppLayout = ({ children }) => {
-  const [isLoggendIn, setIsLoggedIn] = useState(false);
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
 
   return (
     <div>
@@ -39,11 +43,7 @@ const AppLayout = ({ children }) => {
       </Menu>
       <Row gutter={8}>
         <Col xs={24} md={6}>
-          {isLoggendIn ? (
-            <UserProfile setIsLoggedIn={setIsLoggedIn} />
-          ) : (
-            <LogginForm setIsLoggedIn={setIsLoggedIn} />
-          )}
+          {isLoggedIn ? <UserProfile /> : <LogginForm />}
         </Col>
         <Col xs={24} md={12}>
           {children}
