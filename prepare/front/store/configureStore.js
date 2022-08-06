@@ -1,20 +1,25 @@
+import { applyMiddleware, createStore, compose } from "redux";
+import createSagaMiddleware from "redux-saga";
 import { createWrapper } from "next-redux-wrapper";
-import { applyMiddleware, compose, createStore } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 
 import reducer from "../reducers";
+import rootSaga from "../sagas";
 
 const configureStore = () => {
-  const middelwares = [];
+  const sagaMiddleware = createSagaMiddleware();
+  const middlewares = [sagaMiddleware];
   const enhancer =
     process.env.NODE_ENV === "production"
-      ? compose(applyMiddleware(...middelwares)) // 배포용일때는 연결 안하기 (히스토리 남아서 보안 취약)
-      : composeWithDevTools(applyMiddleware(...middelwares)); // 개발용
+      ? compose(applyMiddleware(...middlewares))
+      : composeWithDevTools(applyMiddleware(...middlewares));
   const store = createStore(reducer, enhancer);
+  store.sagaTask = sagaMiddleware.run(rootSaga);
   return store;
 };
 
 const wrapper = createWrapper(configureStore, {
   debug: process.env.NODE_ENV === "development",
 });
+
 export default wrapper;
